@@ -114,10 +114,10 @@ class NPais:
 
     @classmethod
     def abrir(cls):
-        cls.__cidades = []
+        cls.__paises = []
         try:
             with open("paises.json", mode="r") as arquivo:
-                cidades_json = json.load(arquivo)
+                paises_json = json.load(arquivo)
                 for obj in paises_json:
                     aux = Pais(obj["PaisId"], obj["_Paisnome"], obj["_Paishabitantes"], obj["_Paistamanho"], obj["_Paismoeda"], obj["_Paisidioma"], obj["_Paisfuso_horario"], obj["_Paiscapital"])
                     cls.__paises.append(aux)
