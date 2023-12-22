@@ -10,7 +10,7 @@ class Estado:
         self.__capital = capital
         self.__municipios = municipios
 
-    def get_id(self): return self.__id 
+    def get_id(self): return self.__id
     def get_id_pais(self): self.__id_pais
     def get_nome(self): return self.__nome
     def get_habitantes(self): return self.__habitantes 

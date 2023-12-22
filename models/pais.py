@@ -25,7 +25,6 @@ class Pais:
             raise ValueError("O número de habitantes deve ser maior que 0")
         else:
             self.__habitantes = habitantes
-            return self.__habitantes
     def set_tamanho(self, tamanho):
         if tamanho == "":
             raise ValueError("Preencha o tamanho do país")
@@ -33,27 +32,22 @@ class Pais:
             raise ValueError("O tamanho do país deve ser maior que 0")
         else:
             self.__tamanho = tamanho
-            return self.__tamanho
     def set_moeda(self,moeda):
         if moeda == '':
             raise ValueError("Preencha qual o nome da moeda")
         else: self.__moeda = moeda
-        return moeda
     def set_idioma(self, idioma):
         if idioma == '':
             raise ValueError("Preencha qual o idioma do país")
         else: self.__idioma = idioma
-        return self.__idioma
     def set_fuso_horario(self, fuso_horario):
         if fuso_horario == '':
             raise ValueError("Preencha qual o fuso horário do país")
         else: self.__fuso_horario = fuso_horario
-        return self.__fuso_horario
     def set_capital(self,capital):
         if capital == '':
             raise ValueError("Preencha qual a capital do país")
         else: self.__capital = capital
-        return capital
     
     def get_id(self):return self.__id
     def get_nome(self):return self.__nome

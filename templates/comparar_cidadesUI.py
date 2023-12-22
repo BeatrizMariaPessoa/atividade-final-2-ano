@@ -14,3 +14,5 @@ class CompararCidadesUI:
         opcao2_es = st.selectbox('Escolha o segundo estado',('op1','op2','op3'))
         opacao2_cid = st.selectbox('Escolha a segunda cidade',('op1','op2','op3'))
         st.write("Quem possui maiores atributos e a diferença entre o primeiro e o segundo")
+
+        
