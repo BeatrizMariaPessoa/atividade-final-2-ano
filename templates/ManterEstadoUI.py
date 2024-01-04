@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import pandas as pd
 import numpy as np
+from views import View
 
 class ManterEstadoUI:
     def main():
@@ -13,13 +14,16 @@ class ManterEstadoUI:
         with tab4: ManterEstadoUI.Excluir()
 
     def Inserir():
-        pais = st.selectbox('Escolha um país',('Bolivia','Brasil','China','Opção genérica'))
+        # TA ERRADO E PRECISA CONCERTAR
+        paises = View.pais_listar
+        pais = st.selectbox('Escolha um país',())
         nome = st.text_input("Informe o nome")
         habitantes = st.number_input("Informe o número de habitantes")
         tamanho = st.number_input("Informe o tamanho do estado(km)")
         capital = st.text_input("Informe qual a capital do estado")
         municipios = st.number_input("Informe a quantidade de municipios")
         if st.button("Inserir"):
+            View.estado_inserir(0, id_pais)
             st.success("Estado inserido com sucesso")
             time.sleep(2)
             st.rerun()
