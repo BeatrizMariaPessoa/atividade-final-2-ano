@@ -19,7 +19,7 @@ class ManterUsuarioUI:
     fone = st.text_input("Informe o fone")
     senha = st.text_input("Informe a senha")
     if st.button("Inserir"):
-      View.usuario_inserir(0, nome, email, fone, senha)
+      View.usuario_inserir(nome, email, fone, senha)
       st.success("usuario inserido com sucesso")
       time.sleep(2)
       st.rerun()

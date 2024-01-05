@@ -16,6 +16,6 @@ class CompararPaisesUI:
         if st.button("Comparar"):
             st.write(maior_tamanho)
             st.write(maior_hab)
-            st.success("")
+            
             time.sleep(2)
             # st.rerun()

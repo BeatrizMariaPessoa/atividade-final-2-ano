@@ -1,3 +1,4 @@
+# from curses import ACS_DIAMOND
 import streamlit as st
 import time
 from views import View
@@ -10,11 +11,10 @@ class EditarPerfilUI:
             usuario = View.usuario_listar()
             if st.session_state["usuario_id"] == usuario[0].get_id():
                 id = st.session_state["usuario_id"]
-                email = st.text_input("Informe o novo e-mail")
                 fone = st.text_input("Informe o novo telefone")
                 senha = st.text_input("Informe a nova senha")
                 if st.button("Mudar dados"):
-                    View.editar_perfil(id, "Admin", email, fone, senha)
+                    View.editar_perfil(id, "Admin", "Admin@g", fone, senha)
                     st.success("Dados do Admin atualizados com sucesso")
                     time.sleep(2)
                     st.rerun()

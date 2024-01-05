@@ -1,5 +1,6 @@
 import streamlit as st
 import time 
+from views import View
 
 class EditarInfosUI:
     def main():

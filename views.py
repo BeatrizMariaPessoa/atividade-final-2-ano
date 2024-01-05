@@ -3,9 +3,10 @@ from models.estado import Estado,NEstado
 from models.pais import Pais,NPais
 from models.usuario import Usuario,NUsuario
 import datetime
+import streamlit as st
 
 class View:
-    def usuario_inserir(id, nome, email, fone, senha):
+    def usuario_inserir(nome, email, fone, senha):
         usuario = Usuario(0, nome, email, fone, senha)
         NUsuario.inserir(usuario)
 
@@ -24,13 +25,17 @@ class View:
         NUsuario.excluir(usuario)
 
     def usuario_admin():
-        for usuario in View.usuario_listar():
-            if usuario.get_nome() == "admin": return
-        View.usuario_inserir(0,"admin", "admin@g", "0000", "admin")
+        if len(View.usuario_listar()) == 0:
+            View.usuario_inserir("admin", "admin@g", "0000", "admin")
+
 
     def usuario_login(email, senha):
-        for usuario in View.usuario_listar():
+        lista = View.usuario_listar()
+
+
+        for usuario in lista:
             if usuario.get_email() == email and usuario.get_senha() == senha:
+             
                 return usuario
         return None
     

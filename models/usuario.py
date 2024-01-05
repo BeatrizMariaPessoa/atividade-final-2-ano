@@ -39,7 +39,7 @@ class Usuario:
         return self.__senha
     
     def __str__(self):
-        return f"Id:{self.__id} - Nome:{self.__nome} - E-mail{self.__email} - Telefone:{self.__fone}"
+        return f"{self.__id} - {self.__nome}  - {self.__email}  - {self.__fone}"
 
 
 class NUsuario(Modelo):
