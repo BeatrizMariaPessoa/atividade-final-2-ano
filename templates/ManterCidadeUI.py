@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import pandas as pd
 import numpy as np
+from views import View
 
 class ManterCidadeUI:
     def main():
@@ -13,43 +14,54 @@ class ManterCidadeUI:
         with tab4: ManterCidadeUI.Excluir()
 
     def Inserir():
-        estado = st.selectbox('Selecione o estado em que a cidade se localiza', ('Amazonas','Rio Grande do Norte','São Paulo'))
+        estados = View.estado_listar()
+        estado = st.selectbox('Selecione o estado em que a cidade se localiza', estados)
+        id_estado = estado.get_id()
         nome = st.text_input("Informe o nome da cidade")
         habitantes = st.number_input("Informe o número de habitantes")
         tamanho = st.number_input("Informe o tamanho da cidade(km²)")
         if st.button("Inserir"):
+            View.cidade_inserir(id_estado, nome, habitantes, tamanho)
             st.success("Cidade inserida com sucesso.")
             time.sleep(2)
             st.rerun()
 
     def Listar():
-        @st.cache_data
-        def load_data():
-            return pd.DataFrame(
-            {
-                "Nome": ['Manaus','Natal'],
-                "Habitantes": [2020000, 890400],
-                "Tamanho(km²)": [11401, 167.4],
-                "Estado": ['Amazonas','Rio Grande do Norte']
-            }
-        )
-        st.checkbox("Use container width", value=False, key="use_container_width")
-        df = load_data()
-        st.dataframe(df, use_container_width=st.session_state.use_container_width)
+        cidades = View.cidade_listar()
+        if len(cidades) == 0:
+            st.write("Nenhuma cidade cadastrada")
+        else:
+            dic = []
+            for obj in cidades: dic.append(obj.__dict__)
+            df = pd.DataFrame(dic)
+            st.dataframe(df)
 
     def Atualizar():
-        ids = st.selectbox('Selecione o id da cidade a ser atualizada',(0,1,2,3,4))
-        nome = st.text_input("Novo nome")
-        habitantes = st.number_input("Informe o novo número de habitantes")
-        tamanho = st.number_input("Informe o novo tamanho da cidade(km²)")
-        if st.button("Atualizar"):
-            st.success('Dados atualizados com sucesso.')
-            time.sleep(2)
-            st.rerun()
+        cidades = View.cidade_listar()
+        if len(cidades) == 0:
+            st.write("Nenhum cliente cadastrado")
+        else:
+            op = st.selectbox("Atualização de cidades", cidades)
+            id_estado = st.text_input("Informe o novo estado", op.get_id_estado())
+            nome = st.text_input("Informe o novo nome", op.get_nome())
+            habitantes = st.text_input("Informe o novo n° de habitantes", op.get_habitantes())
+            tamanho = st.text_input("Informe o novo tamanho", op.get_tamanho())
+            if st.button("Atualizar"):
+                id = op.get_id()
+                View.cliente_atualizar(id, id_estado, nome, habitantes, tamanho)
+                st.success("Cidade atualizada com sucesso")
+                time.sleep(2)
+                st.rerun()
 
     def Excluir():
-        nomes = st.selectbox('Selecione o nome da cidade a ser excluída',('Manaus','Natal','São Paulo'))
-        if st.button("Excluir"):
-            st.success('Cidade excluída com sucesso.')
-            time.sleep(2)
-            st.rerun()
+        cidades = View.cidade_listar()
+        if len(cidades) == 0:
+            st.write("Nenhuma cidade no banco de dados")
+        else:
+            op = st.selectbox("Exclusão de cidades", cidades)
+            if st.button("Excluir"):
+                id = op.get_id()
+                View.cidade_escluir(id)
+                st.success("Cidade excluída com sucesso")
+                time.sleep(2)
+                st.rerun()

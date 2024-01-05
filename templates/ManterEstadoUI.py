@@ -14,52 +14,66 @@ class ManterEstadoUI:
         with tab4: ManterEstadoUI.Excluir()
 
     def Inserir():
-        # TA ERRADO E PRECISA CONCERTAR
-        paises = View.pais_listar
-        pais = st.selectbox('Escolha um país',())
+        paise = View.pais_listar()
+        pais = st.selectbox('Escolha um país', paise)
+        id_pais = pais.get_id()
         nome = st.text_input("Informe o nome")
         habitantes = st.number_input("Informe o número de habitantes")
         tamanho = st.number_input("Informe o tamanho do estado(km)")
         capital = st.text_input("Informe qual a capital do estado")
         municipios = st.number_input("Informe a quantidade de municipios")
         if st.button("Inserir"):
-            View.estado_inserir(0, id_pais)
+            View.estado_inserir(0,id_pais, nome, habitantes, tamanho, capital, municipios)
             st.success("Estado inserido com sucesso")
             time.sleep(2)
             st.rerun()
 
     def Listar():
-        @st.cache_data
-        def load_data():
-            return pd.DataFrame(
-            {
-
-                "Nome": ['op1','op2'],
-                "Habitantes": ['2','6'],
-                "Tamanho": ['10','20'],
-                "Qnt. de Municipios": ['3','7'],
-                "Capital": ['Brasília','Washington'],
-            }
-        )
-        st.checkbox("Use container width", value=False, key="use_container_width")
-        df = load_data()
-        st.dataframe(df, use_container_width=st.session_state.use_container_width)
+        estados = View.estado_listar()
+        if len(estados) == 0:
+            st.write("Nenhum estado cadastrado")
+        else:
+            dic = []
+            for obj in estados: 
+                id = obj.get_id()
+                id_pais = obj.get_id_pais()
+                nome = obj.get_nome()
+                habitantes = obj.get_habitantes()
+                tamanho = obj.get_tamanho()
+                capital = obj.get_capital()
+                municipios = obj.get_municipios()
+                dic.append([id, id_pais, nome, habitantes, tamanho, capital, municipios])
+            df = pd.DataFrame(dic, columns=['Id','Id do país','Nome','Habitantes','Tamanho','Capital','Municípios'])
+            st.dataframe(df)
 
     def Atualizar():
-        ids = st.selectbox('Selecione o id do estado a ser atualizado',(0,1,2,3,4))
-        nome = st.text_input("Novo nome")
-        habitantes = st.number_input("Informe o novo número de habitantes")
-        tamanho = st.number_input("Informe o novo tamanho do estado(km)")
-        capital = st.text_input("Informe qual a nova capital do estado")
-        municipios = st.number_input("Informe a nova quantidade de municipios")
-        if st.button("Atualizar"):
-            st.success('Estado atualizado com sucesso.')
-            time.sleep(2)
-            st.rerun()
+        estados = View.estado_listar()
+        if len(estados) == 0:
+            st.write("Nenhum estado cadastrado")
+        else:
+            op = st.selectbox("Atualização de Estado", estados)
+
+            nome = st.text_input("Informe o novo nome", op.get_nome())
+            habitantes = st.number_input("Informe o novo número de habitantes", op.get_habitantes())
+            tamanho = st.number_input("Informe o novo tamanho do estado(km²)", op.get_tamanho())
+            capital = st.text_input("Informe qual a nova capital do estado", op.get_capital())
+            municipios = st.number_input("Informe a nova quantidade de municipios", op.get_municipios())
+            if st.button("Atualizar"):
+                id = op.get_id()
+                View.pais_atualizar(id, nome, habitantes, tamanho, capital, municipios)
+                st.success('Estado atualizado com sucesso.')
+                time.sleep(2)
+                st.rerun()
 
     def Excluir():
-        nomes = st.selectbox('Selecione o nome do estado a ser excluído',('op1','op2','op3','op4'))
-        if st.button("Excluir"):
-            st.success('estado excluído com sucesso.')
-            time.sleep(2)
-            st.rerun()
+        estados = View.estado_listar()
+        if len(estados) == 0:
+            st.write("Nenhum estado cadastrado")
+        else:
+            op = st.selectbox("Exclusão de Estados", estados)
+            if st.button("Excluir"):
+                id = op.get_id()
+                View.estado_escluir(id)
+                st.success("Estado excluído com sucesso")
+                time.sleep(2)
+                st.rerun()

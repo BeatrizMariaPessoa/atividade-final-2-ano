@@ -1,4 +1,6 @@
 import streamlit as st
+from views import View
+import time
 
 class CompararCidadesUI:
     def main():
@@ -6,13 +8,19 @@ class CompararCidadesUI:
         CompararCidadesUI.comparar_cidadesUI()
     
     def comparar_cidadesUI():
-        opcao1_pais = st.selectbox('Escolha o primeiro país',('Bolivia','Brasil','China','Opção genérica'))
-        opcao1_es = st.selectbox('Escolha o primeiro estado',('op1','op2','op3'))
-        opacao1_cid = st.selectbox('Escolha a primeira cidade',('op1','op2','op3'))
-
-        opcao2_pais = st.selectbox('Escolha o segundo país',('Bolivia','Brasil','China','Opção genérica'))
-        opcao2_es = st.selectbox('Escolha o segundo estado',('op1','op2','op3'))
-        opacao2_cid = st.selectbox('Escolha a segunda cidade',('op1','op2','op3'))
-        st.write("Quem possui maiores atributos e a diferença entre o primeiro e o segundo")
-
-        
+        paises = View.pais_listar()
+        pais = st.selectbox('Escolha o país', paises)
+        pais_id = pais.get_id()
+        estados = View.listar_estados(pais_id)
+        estado = st.selectbox('Escolha o estado', estados)
+        estado_id = estado.get_id()
+        cidades = View.listar_cidades(estado_id)
+        opcao1 = st.selectbox('Escolha a primeira cidade', cidades)
+        opcao2 = st.selectbox('Escolha a segunda cidade', cidades)
+        maior_tamanho = View.comparar_tamanho(opcao1.get_tamanho(), opcao1.get_nome(), opcao2.get_nome(), opcao2.get_tamanho())
+        maior_hab = View.comparar_habitantes(opcao1.get_habitantes(), opcao2.get_habitantes(), opcao1.get_nome(), opcao2.get_nome())
+        if st.button("Comparar"):
+            st.write(maior_tamanho)
+            st.write(maior_hab)
+            st.success("")
+            time.sleep(2)

@@ -16,7 +16,7 @@ class Usuario:
     def get_fone(self): return self.__fone
     def get_senha(self): return self.__senha
 
-    def set_id(self, id): self.__id == id
+    def set_id(self, id): self.__id = id
     def set_nome(self, nome): 
         if nome == '':
             raise ValueError("Preencha o nome")
@@ -50,12 +50,8 @@ class NUsuario(Modelo):
             with open("usuarios.json", mode="r") as arquivo:
                 usuarios_json = json.load(arquivo)
                 for obj in usuarios_json:
-                    aux = Usuario(obj["_Usuário__id"], 
-                                obj["_Usuário__nome"], 
-                                obj["_Usuário__email"],
-                                obj["_Usuário__fone"],
-                                obj["_Usuário__senha"])
-            cls.objetos.append(aux)
+                    aux = Usuario(obj["_Usuario__id"],obj["_Usuario__nome"],obj["_Usuario__email"],obj["_Usuario__fone"],obj["_Usuario__senha"])
+                    cls.objetos.append(aux)
         except FileNotFoundError:
             pass
 
@@ -77,7 +73,7 @@ class NUsuario(Modelo):
 #         for aux in cls.__usuarios:
 #             if aux.get_id() > id: id = aux.get_id()
 #         obj.set_id(id + 1)
-#         cls.__clientes.append(obj)
+#         cls.__usuarios.append(obj)
 #         cls.salvar()
 
 #     @classmethod
@@ -118,11 +114,11 @@ class NUsuario(Modelo):
 #             with open("usuarios.json", mode="r") as arquivo:
 #                 usuarios_json = json.load(arquivo)
 #                 for obj in usuarios_json:
-#                     aux = Usuario(obj["_Usuário__id"], 
-#                                 obj["_Usuário__nome"], 
-#                                 obj["_Usuário__email"],
-#                                 obj["_Usuário__fone"],
-#                                 obj["_Usuário__senha"])
+#                     aux = Usuario(obj["_Usuario__id"], 
+#                                 obj["_Usuario__nome"], 
+#                                 obj["_Usuario__email"],
+#                                 obj["_Usuario__fone"],
+#                                 obj["_Usuario__senha"])
 #             cls.__usuarios.append(aux)
 #         except FileNotFoundError:
 #             pass

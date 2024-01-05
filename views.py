@@ -5,7 +5,7 @@ from models.usuario import Usuario,NUsuario
 import datetime
 
 class View:
-    def usuario_inserir(nome, email, fone, senha):
+    def usuario_inserir(id, nome, email, fone, senha):
         usuario = Usuario(0, nome, email, fone, senha)
         NUsuario.inserir(usuario)
 
@@ -26,7 +26,7 @@ class View:
     def usuario_admin():
         for usuario in View.usuario_listar():
             if usuario.get_nome() == "admin": return
-        View.usuario_inserir("admin", "admin", "0000", "admin")
+        View.usuario_inserir(0,"admin", "admin@g", "0000", "admin")
 
     def usuario_login(email, senha):
         for usuario in View.usuario_listar():
@@ -52,7 +52,7 @@ class View:
         cidade = Cidade(id, "", "", "", "")
         NCidade.excluir(cidade)
      
-    def estado_inserir(id_pais, nome, habitantes, tamanho, capital, municipios):
+    def estado_inserir(id, id_pais, nome, habitantes, tamanho, capital, municipios):
         estado = Estado(0, id_pais, nome, habitantes, tamanho, capital, municipios)
         NEstado.inserir(estado)
 
@@ -88,22 +88,37 @@ class View:
         pais = Pais(id, "", "", "", "", "", "", "")
         NPais.excluir(pais)
 
-    def comparar_tamanho(tamanho1, tamanho2):
+    def comparar_tamanho(tamanho1, nome1, nome2, tamanho2):
         if tamanho1 > tamanho2:
-            return tamanho1
+            return f'A opção com maior tamanho é {nome1} e seu tamanho é {tamanho1:.0f} km²'
         elif tamanho1 < tamanho2:
-            return tamanho2
+            return f'A opção com maior tamanho é {nome2} e seu tamanho é {tamanho2:.0f} km²'
         else:
             return "Os valores são iguais."
     
-    def comparar_habitantes(hab1,hab2):
+    def comparar_habitantes(hab1,hab2, nome1, nome2):
         if hab1 > hab2:
-            return hab1
+            return f'A opção com maior população é {nome1} e seu número é de {hab1:.0f} de habitantes'
         elif hab1 < hab2:
-            return hab2
+            return f'A opção com maior população é {nome2} e seu número é de {hab2:.0f} de habitantes'
         else: return "Os valores são iguais"
 
+    def editar_perfil(id, nome, email, fone, senha):
+        NUsuario.atualizar(Usuario(id, nome, email, fone, senha))
 
+    def listar_estados(id_pais):
+        estados_do_pais = []
+        estados = View.estado_listar
+        for obj in estados:
+            if obj.get_id_pais() == id_pais: 
+                estados_do_pais.append(obj)
+        return estados_do_pais
 
-
+    def listar_cidades(id_estado):
+        cidades_do_estado = []
+        cidades = View.cidade_listar
+        for obj in cidades:
+            if obj.get_id_estado() == id_estado:
+                cidades_do_estado.append(obj)
+        return cidades_do_estado
     

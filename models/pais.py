@@ -18,7 +18,6 @@ class Pais:
         if nome == '':
             raise ValueError("Preencha qual o nome do país")
         else: self.__nome = nome
-        return nome
     def set_habitantes(self, habitantes):
         if habitantes == "":
             raise ValueError("Preencha o número de habitantes")

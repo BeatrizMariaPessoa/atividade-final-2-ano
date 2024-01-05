@@ -52,7 +52,7 @@ class NCidade(Modelo):
                 cidades_json = json.load(arquivo)
                 for obj in cidades_json:
                     aux = Cidade(obj["_Cidade__id"], obj["_Cidade__id_estado"], obj["_Cidade__nome"], obj["_Cidade__habitantes"], obj["_Cidade__tamanho"])
-                    cls.onjetos.append(aux)
+                    cls.objetos.append(aux)
         except FileNotFoundError:
             pass
 
