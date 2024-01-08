@@ -13,6 +13,14 @@ class View:
     def usuario_listar():
         return NUsuario.listar()
     
+    def usuario_listar_sem_admin():
+        lista_sem_admin = []
+        for obj in View.usuario_listar():
+            if obj.get_nome() != "admin":
+                lista_sem_admin.append(obj)
+        return lista_sem_admin
+
+    
     def usuario_listar_id():
         return NUsuario.listar_id()
     
@@ -127,3 +135,20 @@ class View:
                 cidades_do_estado.append(obj)
         return cidades_do_estado
     
+    def buscar_pais(nome):
+        paises = View.pais_listar()
+        for obj in paises:
+            if obj.get_nome() == nome:
+                return obj
+    
+    def buscar_estado(nome):
+        estados = View.estado_listar()
+        for obj in estados:
+            if obj.get_nome() == nome:
+                return obj
+    
+    def buscar_cidade(nome):
+        cidades = View.cidade_listar()
+        for obj in cidades:
+            if obj.get_nome() == nome:
+                return obj

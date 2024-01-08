@@ -47,7 +47,7 @@ class Estado:
         else: raise ValueError()
 
     def __str__(self):
-        return f"Id: {self.__id} - País id: {self.__id_pais} - Nome: {self.__nome} - Hab: {self.__habitantes} - Tamanho: {self.__tamanho} - Capital: {self.__capital} - Municipios: {self.__municipios}"
+        return f"Id:{self.__id} - País id:{self.__id_pais} - Nome:{self.__nome} - Hab:{self.__habitantes} - Tamanho:{self.__tamanho} - Capital:{self.__capital} - Municipios:{self.__municipios}"
 
     def get_id(self): return self.__id
     def get_id_pais(self): return self.__id_pais

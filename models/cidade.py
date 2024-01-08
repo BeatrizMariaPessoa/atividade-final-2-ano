@@ -41,7 +41,7 @@ class Cidade:
             self.__tamanho = tamanho
 
     def __str__(self):
-        return f"Id: {self.__id} - Estado: {self.__id_estado} - nome: {self.__nome} - Hab: {self.__habitantes} - tamanho: {self.__tamanho}"
+        return f"Id:{self.__id} - Estado:{self.__id_estado} - Nome:{self.__nome} - Hab:{self.__habitantes} - Tamanho:{self.__tamanho}"
 
 class NCidade(Modelo):
     @classmethod

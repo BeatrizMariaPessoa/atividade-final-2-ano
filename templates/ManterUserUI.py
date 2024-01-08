@@ -40,19 +40,29 @@ class ManterUsuarioUI:
       st.write("Nenhum usuario cadastrado")
     else:
       op = st.selectbox("Atualização de usuarios", usuarios)
-      nome = st.text_input("Informe o novo nome", op.get_nome())
-      email = st.text_input("Informe o novo e-mail", op.get_email())
-      fone = st.text_input("Informe o novo fone", op.get_fone())
-      senha = st.text_input("Informe a nova senha")
-      if st.button("Atualizar"):
-        id = op.get_id()
-        View.usuario_atualizar(id, nome, email, fone, senha)
-        st.success("usuario atualizado com sucesso")
-        time.sleep(2)
-        st.rerun()
+      if op.get_nome() == "admin":
+        fone = st.text_input("Informe o novo fone", op.get_fone())
+        senha = st.text_input("Informe a nova senha")
+        if st.button("Atualizar"):
+          id = op.get_id()
+          View.usuario_atualizar(id, "admin", "admin@g", fone, senha)
+          st.success("usuario atualizado com sucesso")
+          time.sleep(2)
+          st.rerun()
+      else:
+        nome = st.text_input("Informe o novo nome", op.get_nome())
+        email = st.text_input("Informe o novo e-mail", op.get_email())
+        fone = st.text_input("Informe o novo fone", op.get_fone())
+        senha = st.text_input("Informe a nova senha")
+        if st.button("Atualizar"):
+          id = op.get_id()
+          View.usuario_atualizar(id, nome, email, fone, senha)
+          st.success("usuario atualizado com sucesso")
+          time.sleep(2)
+          st.rerun()
 
   def excluir():
-    usuarios = View.usuario_listar()
+    usuarios = View.usuario_listar_sem_admin()
     if len(usuarios) == 0:
       st.write("Nenhum usuario cadastrado")
     else:

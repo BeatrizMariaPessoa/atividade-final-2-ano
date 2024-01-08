@@ -5,13 +5,12 @@ from templates.loguinUI import LoginUI
 from templates.comparar_paisesUI import CompararPaisesUI
 from templates.comparar_estadosUI import CompararEstadosUI
 from templates.comparar_cidadesUI import CompararCidadesUI
-# from templates.buscasUI import BuscasUI
-from templates.editar_infos_geraisUI import EditarInfosUI
 from templates.ManterCidadeUI import ManterCidadeUI
 from templates.ManterUserUI import ManterUsuarioUI
 from templates.ManterEstadoUI import ManterEstadoUI
 from templates.ManterPaisUI import ManterPaisUI
 from templates.abrircontaUI import AbrirContaUI
+from templates.buscasUI import BuscasUI
 from views import View
 
 
@@ -22,23 +21,23 @@ class IndexUI:
                 if op == "Abrir Conta": AbrirContaUI.main() 
                 
         def menu_admin():
-                op = st.sidebar.selectbox("Menu", ["ManterUsuarioUI", "ManterPaisUI", "ManterEstadoUI", "ManterCidadeUI", "Editar Perfil", "EditarInformacoes","Comparar Paises", "Comparar Estados", "Comparar Cidades"])
+                op = st.sidebar.selectbox("Menu", ["ManterUsuarioUI", "ManterPaisUI", "ManterEstadoUI", "ManterCidadeUI", "Editar Perfil","Comparar Paises", "Comparar Estados", "Comparar Cidades"])
                 if op == "ManterPaisUI": ManterPaisUI.main()
                 if op == "ManterEstadoUI": ManterEstadoUI.main()
                 if op == "ManterCidadeUI": ManterCidadeUI.main()
                 if op == "ManterUsuarioUI": ManterUsuarioUI.main()
                 if op == "Editar Perfil": EditarPerfilUI.main()
-                if op == "EditarInformacoes": EditarInfosUI.main()
                 if op == "Comparar Paises": CompararPaisesUI.main()
                 if op == "Comparar Estados": CompararEstadosUI.main()
                 if op == "Comparar Cidades": CompararCidadesUI.main()
 
         def menu_usuario():
-                op = st.sidebar.selectbox("Menu", ["Editar Perfil", "Comparar Paises", "Comparar Estados", "Comparar Cidades"])
+                op = st.sidebar.selectbox("Menu", ["Editar Perfil", "Comparar Paises", "Comparar Estados", "Comparar Cidades", "Buscas"])
                 if op == "Editar Perfil": EditarPerfilUI.main()
                 if op == "Comparar Paises": CompararPaisesUI.main()
                 if op == "Comparar Estados": CompararEstadosUI.main()
                 if op == "Comparar Cidades": CompararCidadesUI.main()
+                if op == "Buscas": BuscasUI.main()
         
         def btn_logout():
                 if st.sidebar.button("Logout"):
@@ -54,7 +53,6 @@ class IndexUI:
                         if st.session_state["usuario_nome"] == "admin": IndexUI.menu_admin()
                         else: IndexUI.menu_usuario()
                         IndexUI.btn_logout()
-                        # st.write(st.session_state["usuario_nome"])
         def main():
                 View.usuario_admin()
                 IndexUI.sidebar()

@@ -59,7 +59,7 @@ class Pais:
     def get_capital(self):return self.__capital
 
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__habitantes:.0f} - {self.__tamanho:.0f} - {self.__moeda} - {self.__idioma} - {self.__fuso_horario:.0f} - {self.__capital}"
+        return f"Id:{self.__id} - Nome:{self.__nome} - Habitantes:{self.__habitantes:.0f} - Tamanho:{self.__tamanho:.0f} - Moeda:{self.__moeda} - Idioma:{self.__idioma} - Fuso-Hoário{self.__fuso_horario:.0f} - Capital:{self.__capital}"
     
 class NPais(Modelo):
     @classmethod

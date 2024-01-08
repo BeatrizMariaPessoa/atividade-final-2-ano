@@ -39,7 +39,7 @@ class ManterCidadeUI:
     def Atualizar():
         cidades = View.cidade_listar()
         if len(cidades) == 0:
-            st.write("Nenhum cliente cadastrado")
+            st.write("Nenhuma cidade cadastrada")
         else:
             op = st.selectbox("Atualização de cidades", cidades)
             id_estado = st.text_input("Informe o novo estado", op.get_id_estado())
@@ -48,7 +48,7 @@ class ManterCidadeUI:
             tamanho = st.text_input("Informe o novo tamanho", op.get_tamanho())
             if st.button("Atualizar"):
                 id = op.get_id()
-                View.cliente_atualizar(id, id_estado, nome, habitantes, tamanho)
+                View.cidade_atualizar(id, id_estado, nome, habitantes, tamanho)
                 st.success("Cidade atualizada com sucesso")
                 time.sleep(2)
                 st.rerun()

@@ -43,7 +43,7 @@ class ManterEstadoUI:
             st.write("Nenhum estado cadastrado")
         else:
             op = st.selectbox("Atualização de Estado", estados)
-
+            id_pais = op.get_id_pais()
             nome = st.text_input("Informe o novo nome", op.get_nome())
             habitantes = st.number_input("Informe o novo número de habitantes", op.get_habitantes())
             tamanho = st.number_input("Informe o novo tamanho do estado(km²)", op.get_tamanho())
@@ -51,7 +51,7 @@ class ManterEstadoUI:
             municipios = st.number_input("Informe a nova quantidade de municipios", op.get_municipios())
             if st.button("Atualizar"):
                 id = op.get_id()
-                View.pais_atualizar(id, nome, habitantes, tamanho, capital, municipios)
+                View.estado_atualizar(id, id_pais, nome, habitantes, tamanho, capital, municipios)
                 st.success('Estado atualizado com sucesso.')
                 time.sleep(2)
                 st.rerun()

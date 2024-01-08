@@ -9,13 +9,13 @@ class EditarPerfilUI:
              EditarPerfilUI.mudar_dados()
         def mudar_dados():
             usuario = View.usuario_listar()
-            if st.session_state["usuario_id"] == usuario[0].get_id():
+            if st.session_state["usuario_nome"] == "admin":
                 id = st.session_state["usuario_id"]
                 fone = st.text_input("Informe o novo telefone")
                 senha = st.text_input("Informe a nova senha")
                 if st.button("Mudar dados"):
-                    View.editar_perfil(id, "Admin", "Admin@g", fone, senha)
-                    st.success("Dados do Admin atualizados com sucesso")
+                    View.editar_perfil(id, "admin", "admin@g", fone, senha)
+                    st.success("Dados do admin atualizados com sucesso")
                     time.sleep(2)
                     st.rerun()
             else:
