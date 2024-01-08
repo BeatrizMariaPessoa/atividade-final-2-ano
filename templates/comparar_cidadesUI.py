@@ -22,5 +22,5 @@ class CompararCidadesUI:
         if st.button("Comparar"):
             st.write(maior_tamanho)
             st.write(maior_hab)
-            st.success("")
+            # st.success("")
             time.sleep(2)

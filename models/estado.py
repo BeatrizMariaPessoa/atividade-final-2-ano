@@ -50,9 +50,9 @@ class Estado:
         return f"Id: {self.__id} - País id: {self.__id_pais} - Nome: {self.__nome} - Hab: {self.__habitantes} - Tamanho: {self.__tamanho} - Capital: {self.__capital} - Municipios: {self.__municipios}"
 
     def get_id(self): return self.__id
-    def get_id_pais(self): self.__id_pais
+    def get_id_pais(self): return self.__id_pais
     def get_nome(self): return self.__nome
-    def get_habitantes(self): return self.__habitantes 
+    def get_habitantes(self): return self.__habitantes
     def get_tamanho(self): return self.__tamanho
     def get_capital(self): return self.__capital
     def get_municipios(self): return self.__municipios

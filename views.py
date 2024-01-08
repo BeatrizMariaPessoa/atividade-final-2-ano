@@ -99,7 +99,7 @@ class View:
         elif tamanho1 < tamanho2:
             return f'A opção com maior tamanho é {nome2} e seu tamanho é {tamanho2:.0f} km²'
         else:
-            return "Os valores são iguais."
+            return "Os valores são iguais"
     
     def comparar_habitantes(hab1,hab2, nome1, nome2):
         if hab1 > hab2:
@@ -113,7 +113,7 @@ class View:
 
     def listar_estados(id_pais):
         estados_do_pais = []
-        estados = View.estado_listar
+        estados = View.estado_listar()
         for obj in estados:
             if obj.get_id_pais() == id_pais: 
                 estados_do_pais.append(obj)
@@ -121,7 +121,7 @@ class View:
 
     def listar_cidades(id_estado):
         cidades_do_estado = []
-        cidades = View.cidade_listar
+        cidades = View.cidade_listar()
         for obj in cidades:
             if obj.get_id_estado() == id_estado:
                 cidades_do_estado.append(obj)

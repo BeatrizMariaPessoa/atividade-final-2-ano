@@ -10,7 +10,7 @@ class Cidade:
         self.__tamanho = tamanho
 
     def get_id(self): return self.__id 
-    def get_id_estado(self): self.__id_estado
+    def get_id_estado(self): return self.__id_estado
     def get_nome(self): return self.__nome
     def get_habitantes(self): return self.__habitantes 
     def get_tamanho(self): return self.__tamanho 

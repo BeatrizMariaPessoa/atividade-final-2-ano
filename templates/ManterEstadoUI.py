@@ -32,18 +32,9 @@ class ManterEstadoUI:
         estados = View.estado_listar()
         if len(estados) == 0:
             st.write("Nenhum estado cadastrado")
-        else:
-            dic = []
-            for obj in estados: 
-                id = obj.get_id()
-                id_pais = obj.get_id_pais()
-                nome = obj.get_nome()
-                habitantes = obj.get_habitantes()
-                tamanho = obj.get_tamanho()
-                capital = obj.get_capital()
-                municipios = obj.get_municipios()
-                dic.append([id, id_pais, nome, habitantes, tamanho, capital, municipios])
-            df = pd.DataFrame(dic, columns=['Id','Id do país','Nome','Habitantes','Tamanho','Capital','Municípios'])
+        else:  
+            dic = [{"ID Estado": estado.get_id(), "ID País": estado.get_id_pais(), "Nome": estado.get_nome(), "Habitantes" : estado.get_habitantes(), "Tamanho": estado.get_tamanho(), "Capital" : estado.get_capital(), "Municípios" : estado.get_municipios()} for estado in estados]
+            df = pd.DataFrame(dic)
             st.dataframe(df)
 
     def Atualizar():
